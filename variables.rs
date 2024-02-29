@@ -56,7 +56,16 @@ fn main() {
     // Borrow a section of array
     borrow_trial(&array[1 .. 5]);
 
-    for i in 0..array.len() {
-        match array.get()
+    // Wrong for loop
+    for i in 0..array.len()+1 {
+        println!("{}: {}", i, array[i]);
+    }
+
+    // Good for loop
+    for i in 0..array.len()+1  {
+        match array.get(i) {
+            Some(val) => println!("{}: {}", i, val),
+            None => println!("Out of bounds"),
+        }
     }
 }
